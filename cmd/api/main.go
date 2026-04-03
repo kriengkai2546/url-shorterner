@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"urlshortener/internal/auth"
 	"urlshortener/pkg/database"
 
 	"github.com/joho/godotenv"
@@ -15,18 +16,15 @@ func main() {
 		log.Println("no .env file, using system env")
 	}
 
-	// เพิ่มบรรทัดนี้
-	log.Printf("DB_HOST=%s DB_NAME=%s", os.Getenv("DB_HOST"), os.Getenv("DB_NAME"))
-
 	// connect DB
 	db := database.Connect()
 	defer db.Close()
 
-	// start server
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
+	authRepo := auth.NewRepository(db)
+	authService := auth.NewService(authRepo)
+	authHandler := *auth.NewHandler(authService)
+
+
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
@@ -34,6 +32,11 @@ func main() {
 		w.Write([]byte(`{"status":"ok"}`))
 	})
 
+	mux.HandleFunc("/auth/register", authHandler.Register)
+	mux.HandleFunc("/auth/login", authHandler.Login)
+
+	// start server
+	port := os.Getenv("PORT")
 	log.Printf("Server running on :%s", port)
 	if err := http.ListenAndServe(":"+port, mux); err != nil {
 		log.Fatal(err)
