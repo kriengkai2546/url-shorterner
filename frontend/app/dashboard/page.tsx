@@ -84,11 +84,11 @@ export default function DashboardPage() {
                         <div className="bg-green-50 border border-green-200 rounded p-3 mb-3">
                             <p className="text-sm text-green-800 font-medium">สร้างสำเร็จ</p>
                             <a
-                                href={newURL.short_url}
+                                href={`${API_URL}/${newURL.short_code}`}
                                 target="_blank"
                                 className="text-sm text-blue-600 hover:underline"
                             >
-                                {newURL.short_url}
+                                {`${API_URL}/${newURL.short_code}`}
                             </a>
                         </div>
                     )}
