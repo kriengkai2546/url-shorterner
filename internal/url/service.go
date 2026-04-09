@@ -26,6 +26,7 @@ func (s *Service) CreateURL(userID int, longURL string) (*CreateURLResponse, err
 
 	baseURL := os.Getenv("BASE_URL")
 	return &CreateURLResponse{
+		ID:        u.ID,
 		ShortCode: u.ShortCode,
 		ShortURL:  fmt.Sprintf("%s/%s", baseURL, u.ShortCode),
 		LongURL:   u.LongURL,

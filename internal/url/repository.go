@@ -41,3 +41,8 @@ func (r *Repository) Delete(id, userID int) error {
 	_, err := r.db.Exec(query, id, userID)
 	return  err
 }
+
+func (r *Repository) RecordClick(urlID int) error {
+	_, err := r.db.Exec(`INSERT INTO clicks (url_id) VALUES ($1)`, urlID)
+	return err
+}

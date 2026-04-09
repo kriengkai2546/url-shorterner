@@ -15,6 +15,7 @@ type CreateURLRequest struct {
 }
 
 type CreateURLResponse struct {
+	ID int `json:"id"`
 	ShortCode string `json:"short_code"`
 	ShortURL string `json:"short_url"`
 	LongURL string `json:"long_url"`
