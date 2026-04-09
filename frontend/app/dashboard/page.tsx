@@ -125,11 +125,11 @@ export default function DashboardPage() {
                                 >
                                 <div className="min-w-0 flex-1">
                                     <a
-                                        href={`http://localhost:8080/${url.short_code}`}
+                                        href={url.short_url}
                                         target="_blank"
                                         className="text-sm text-blue-600 font-medium hover:underline"
                                     >
-                                        localhost:8080/{url.short_code}
+                                        {url.short_url}
                                     </a>
                                     <p className="text-xs text-gray-400 truncate mt-1">
                                         {url.long_url}
