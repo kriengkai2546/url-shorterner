@@ -22,6 +22,7 @@ func Connect() *Cache {
 			os.Getenv("REDIS_HOST"),
 			os.Getenv("REDIS_PORT"),
 		),
+		Password: os.Getenv("REDIS_PASSWORD"),
 	})
 
 	if err := client.Ping(ctx).Err(); err != nil {
