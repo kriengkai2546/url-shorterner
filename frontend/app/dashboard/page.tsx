@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { createURL, getMyURLs, deleteURL } from "@/lib/api"
+import { createURL, getMyURLs, deleteURL, API_URL } from "@/lib/api"
 
 export default function DashboardPage() {
     const router = useRouter()
@@ -125,11 +125,11 @@ export default function DashboardPage() {
                                 >
                                 <div className="min-w-0 flex-1">
                                     <a
-                                        href={url.short_url}
+                                        href={`${API_URL}/${url.short_code}`}
                                         target="_blank"
                                         className="text-sm text-blue-600 font-medium hover:underline"
                                     >
-                                        {url.short_url}
+                                        {API_URL}/{url.short_code}
                                     </a>
                                     <p className="text-xs text-gray-400 truncate mt-1">
                                         {url.long_url}
